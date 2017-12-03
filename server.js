@@ -30,3 +30,50 @@ var article = require('./models/Article.js');
 app.get('/', function(req, res) {
 	res.send(index.html);
 });
+
+//scrape articles using cheerio
+
+app.get ("/scrape", function (req, res) {
+	
+	request("http://....", function (error, response, html){
+		var $ = cheerio.load(html);
+		
+		$(".title").each(function(i, element){
+			var title = $(this).children("a").text();
+			var link = $(this).children("a").attr("href");
+
+			if (title && link) {
+				db.scrapedData.save({
+					title: title,
+					link: link
+			},
+			function(error, saved) {
+				if (error) {
+					console.log(error);
+				}
+
+				else {
+					console.log(saved);
+				}
+	});		
+
+
+}
+
+});
+
+
+res.send("scrape complete");
+
+});
+
+
+
+//listen on port 3000
+
+app.listen(3000, function() {
+	console.log("app running on port 3000");
+
+});
+
+
