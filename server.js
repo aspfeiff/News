@@ -47,7 +47,9 @@ app.get ("/scrape", function (req, res) {
 					title: title,
 					link: link
 			},
+			
 			function(error, saved) {
+				
 				if (error) {
 					console.log(error);
 				}
@@ -55,12 +57,12 @@ app.get ("/scrape", function (req, res) {
 				else {
 					console.log(saved);
 				}
-	});		
+			}
+
+	);		
 
 
-}
-
-});
+};
 
 
 res.send("scrape complete");
